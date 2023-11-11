@@ -37,6 +37,8 @@ serde_json = { version = "1.0", optional = true }
 sqlparser_derive = { version = "0.1.1", path = "derive", optional = true }
 
 [dev-dependencies]
+datatest-stable = "0.2.3"
+insta = { version = "1.32.0", features = ["yaml"] }
 simple_logger = "4.0"
 matches = "0.1"
 pretty_assertions = "1"
@@ -50,3 +52,8 @@ publish = false
 [package.metadata.docs.rs]
 # Document these features on docs.rs
 features = ["serde", "visitor"]
+
+[[test]]
+name = "sqlparser_snapshot"
+harness = false
+required-features = ["serde"]
