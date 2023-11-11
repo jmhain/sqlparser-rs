@@ -1,0 +1,421 @@
+---
+source: tests/sqlparser_snapshot.rs
+expression: stmts
+---
+- Query:
+    with: ~
+    body:
+      Select:
+        distinct: ~
+        top: ~
+        projection:
+          - UnnamedExpr:
+              Identifier:
+                value: o_year
+                quote_style: ~
+          - ExprWithAlias:
+              expr:
+                BinaryOp:
+                  left:
+                    Function:
+                      name:
+                        - value: sum
+                          quote_style: ~
+                      args:
+                        - Unnamed:
+                            Expr:
+                              Case:
+                                operand: ~
+                                conditions:
+                                  - BinaryOp:
+                                      left:
+                                        Identifier:
+                                          value: nation
+                                          quote_style: ~
+                                      op: Eq
+                                      right:
+                                        Value:
+                                          SingleQuotedString: BRAZIL
+                                results:
+                                  - Identifier:
+                                      value: volume
+                                      quote_style: ~
+                                else_result:
+                                  Value:
+                                    Number:
+                                      - "0"
+                                      - false
+                      filter: ~
+                      null_treatment: ~
+                      over: ~
+                      distinct: false
+                      special: false
+                      order_by: []
+                  op: Divide
+                  right:
+                    Function:
+                      name:
+                        - value: sum
+                          quote_style: ~
+                      args:
+                        - Unnamed:
+                            Expr:
+                              Identifier:
+                                value: volume
+                                quote_style: ~
+                      filter: ~
+                      null_treatment: ~
+                      over: ~
+                      distinct: false
+                      special: false
+                      order_by: []
+              alias:
+                value: mkt_share
+                quote_style: ~
+        into: ~
+        from:
+          - relation:
+              Derived:
+                lateral: false
+                subquery:
+                  with: ~
+                  body:
+                    Select:
+                      distinct: ~
+                      top: ~
+                      projection:
+                        - ExprWithAlias:
+                            expr:
+                              Extract:
+                                field: Year
+                                expr:
+                                  Identifier:
+                                    value: o_orderdate
+                                    quote_style: ~
+                            alias:
+                              value: o_year
+                              quote_style: ~
+                        - ExprWithAlias:
+                            expr:
+                              BinaryOp:
+                                left:
+                                  Identifier:
+                                    value: l_extendedprice
+                                    quote_style: ~
+                                op: Multiply
+                                right:
+                                  Nested:
+                                    BinaryOp:
+                                      left:
+                                        Value:
+                                          Number:
+                                            - "1"
+                                            - false
+                                      op: Minus
+                                      right:
+                                        Identifier:
+                                          value: l_discount
+                                          quote_style: ~
+                            alias:
+                              value: volume
+                              quote_style: ~
+                        - ExprWithAlias:
+                            expr:
+                              CompoundIdentifier:
+                                - value: n2
+                                  quote_style: ~
+                                - value: n_name
+                                  quote_style: ~
+                            alias:
+                              value: nation
+                              quote_style: ~
+                      into: ~
+                      from:
+                        - relation:
+                            Table:
+                              name:
+                                - value: part
+                                  quote_style: ~
+                              alias: ~
+                              args: ~
+                              with_hints: []
+                              version: ~
+                              partitions: []
+                          joins: []
+                        - relation:
+                            Table:
+                              name:
+                                - value: supplier
+                                  quote_style: ~
+                              alias: ~
+                              args: ~
+                              with_hints: []
+                              version: ~
+                              partitions: []
+                          joins: []
+                        - relation:
+                            Table:
+                              name:
+                                - value: lineitem
+                                  quote_style: ~
+                              alias: ~
+                              args: ~
+                              with_hints: []
+                              version: ~
+                              partitions: []
+                          joins: []
+                        - relation:
+                            Table:
+                              name:
+                                - value: orders
+                                  quote_style: ~
+                              alias: ~
+                              args: ~
+                              with_hints: []
+                              version: ~
+                              partitions: []
+                          joins: []
+                        - relation:
+                            Table:
+                              name:
+                                - value: customer
+                                  quote_style: ~
+                              alias: ~
+                              args: ~
+                              with_hints: []
+                              version: ~
+                              partitions: []
+                          joins: []
+                        - relation:
+                            Table:
+                              name:
+                                - value: nation
+                                  quote_style: ~
+                              alias:
+                                name:
+                                  value: n1
+                                  quote_style: ~
+                                columns: []
+                              args: ~
+                              with_hints: []
+                              version: ~
+                              partitions: []
+                          joins: []
+                        - relation:
+                            Table:
+                              name:
+                                - value: nation
+                                  quote_style: ~
+                              alias:
+                                name:
+                                  value: n2
+                                  quote_style: ~
+                                columns: []
+                              args: ~
+                              with_hints: []
+                              version: ~
+                              partitions: []
+                          joins: []
+                        - relation:
+                            Table:
+                              name:
+                                - value: region
+                                  quote_style: ~
+                              alias: ~
+                              args: ~
+                              with_hints: []
+                              version: ~
+                              partitions: []
+                          joins: []
+                      lateral_views: []
+                      selection:
+                        BinaryOp:
+                          left:
+                            BinaryOp:
+                              left:
+                                BinaryOp:
+                                  left:
+                                    BinaryOp:
+                                      left:
+                                        BinaryOp:
+                                          left:
+                                            BinaryOp:
+                                              left:
+                                                BinaryOp:
+                                                  left:
+                                                    BinaryOp:
+                                                      left:
+                                                        BinaryOp:
+                                                          left:
+                                                            BinaryOp:
+                                                              left:
+                                                                Identifier:
+                                                                  value: p_partkey
+                                                                  quote_style: ~
+                                                              op: Eq
+                                                              right:
+                                                                Identifier:
+                                                                  value: l_partkey
+                                                                  quote_style: ~
+                                                          op: And
+                                                          right:
+                                                            BinaryOp:
+                                                              left:
+                                                                Identifier:
+                                                                  value: s_suppkey
+                                                                  quote_style: ~
+                                                              op: Eq
+                                                              right:
+                                                                Identifier:
+                                                                  value: l_suppkey
+                                                                  quote_style: ~
+                                                      op: And
+                                                      right:
+                                                        BinaryOp:
+                                                          left:
+                                                            Identifier:
+                                                              value: l_orderkey
+                                                              quote_style: ~
+                                                          op: Eq
+                                                          right:
+                                                            Identifier:
+                                                              value: o_orderkey
+                                                              quote_style: ~
+                                                  op: And
+                                                  right:
+                                                    BinaryOp:
+                                                      left:
+                                                        Identifier:
+                                                          value: o_custkey
+                                                          quote_style: ~
+                                                      op: Eq
+                                                      right:
+                                                        Identifier:
+                                                          value: c_custkey
+                                                          quote_style: ~
+                                              op: And
+                                              right:
+                                                BinaryOp:
+                                                  left:
+                                                    Identifier:
+                                                      value: c_nationkey
+                                                      quote_style: ~
+                                                  op: Eq
+                                                  right:
+                                                    CompoundIdentifier:
+                                                      - value: n1
+                                                        quote_style: ~
+                                                      - value: n_nationkey
+                                                        quote_style: ~
+                                          op: And
+                                          right:
+                                            BinaryOp:
+                                              left:
+                                                CompoundIdentifier:
+                                                  - value: n1
+                                                    quote_style: ~
+                                                  - value: n_regionkey
+                                                    quote_style: ~
+                                              op: Eq
+                                              right:
+                                                Identifier:
+                                                  value: r_regionkey
+                                                  quote_style: ~
+                                      op: And
+                                      right:
+                                        BinaryOp:
+                                          left:
+                                            Identifier:
+                                              value: r_name
+                                              quote_style: ~
+                                          op: Eq
+                                          right:
+                                            Value:
+                                              SingleQuotedString: AMERICA
+                                  op: And
+                                  right:
+                                    BinaryOp:
+                                      left:
+                                        Identifier:
+                                          value: s_nationkey
+                                          quote_style: ~
+                                      op: Eq
+                                      right:
+                                        CompoundIdentifier:
+                                          - value: n2
+                                            quote_style: ~
+                                          - value: n_nationkey
+                                            quote_style: ~
+                              op: And
+                              right:
+                                Between:
+                                  expr:
+                                    Identifier:
+                                      value: o_orderdate
+                                      quote_style: ~
+                                  negated: false
+                                  low:
+                                    TypedString:
+                                      data_type: Date
+                                      value: 1995-01-01
+                                  high:
+                                    TypedString:
+                                      data_type: Date
+                                      value: 1996-12-31
+                          op: And
+                          right:
+                            BinaryOp:
+                              left:
+                                Identifier:
+                                  value: p_type
+                                  quote_style: ~
+                              op: Eq
+                              right:
+                                Value:
+                                  SingleQuotedString: ECONOMY ANODIZED STEEL
+                      group_by:
+                        Expressions: []
+                      cluster_by: []
+                      distribute_by: []
+                      sort_by: []
+                      having: ~
+                      named_window: []
+                      qualify: ~
+                  order_by: []
+                  limit: ~
+                  limit_by: []
+                  offset: ~
+                  fetch: ~
+                  locks: []
+                alias:
+                  name:
+                    value: all_nations
+                    quote_style: ~
+                  columns: []
+            joins: []
+        lateral_views: []
+        selection: ~
+        group_by:
+          Expressions:
+            - Identifier:
+                value: o_year
+                quote_style: ~
+        cluster_by: []
+        distribute_by: []
+        sort_by: []
+        having: ~
+        named_window: []
+        qualify: ~
+    order_by:
+      - expr:
+          Identifier:
+            value: o_year
+            quote_style: ~
+        asc: ~
+        nulls_first: ~
+    limit: ~
+    limit_by: []
+    offset: ~
+    fetch: ~
+    locks: []
+

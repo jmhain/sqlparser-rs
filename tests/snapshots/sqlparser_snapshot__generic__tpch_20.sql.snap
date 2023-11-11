@@ -1,0 +1,331 @@
+---
+source: tests/sqlparser_snapshot.rs
+expression: stmts
+---
+- Query:
+    with: ~
+    body:
+      Select:
+        distinct: ~
+        top: ~
+        projection:
+          - UnnamedExpr:
+              Identifier:
+                value: s_name
+                quote_style: ~
+          - UnnamedExpr:
+              Identifier:
+                value: s_address
+                quote_style: ~
+        into: ~
+        from:
+          - relation:
+              Table:
+                name:
+                  - value: supplier
+                    quote_style: ~
+                alias: ~
+                args: ~
+                with_hints: []
+                version: ~
+                partitions: []
+            joins: []
+          - relation:
+              Table:
+                name:
+                  - value: nation
+                    quote_style: ~
+                alias: ~
+                args: ~
+                with_hints: []
+                version: ~
+                partitions: []
+            joins: []
+        lateral_views: []
+        selection:
+          BinaryOp:
+            left:
+              BinaryOp:
+                left:
+                  InSubquery:
+                    expr:
+                      Identifier:
+                        value: s_suppkey
+                        quote_style: ~
+                    subquery:
+                      with: ~
+                      body:
+                        Select:
+                          distinct: ~
+                          top: ~
+                          projection:
+                            - UnnamedExpr:
+                                Identifier:
+                                  value: ps_suppkey
+                                  quote_style: ~
+                          into: ~
+                          from:
+                            - relation:
+                                Table:
+                                  name:
+                                    - value: partsupp
+                                      quote_style: ~
+                                  alias: ~
+                                  args: ~
+                                  with_hints: []
+                                  version: ~
+                                  partitions: []
+                              joins: []
+                          lateral_views: []
+                          selection:
+                            BinaryOp:
+                              left:
+                                InSubquery:
+                                  expr:
+                                    Identifier:
+                                      value: ps_partkey
+                                      quote_style: ~
+                                  subquery:
+                                    with: ~
+                                    body:
+                                      Select:
+                                        distinct: ~
+                                        top: ~
+                                        projection:
+                                          - UnnamedExpr:
+                                              Identifier:
+                                                value: p_partkey
+                                                quote_style: ~
+                                        into: ~
+                                        from:
+                                          - relation:
+                                              Table:
+                                                name:
+                                                  - value: part
+                                                    quote_style: ~
+                                                alias: ~
+                                                args: ~
+                                                with_hints: []
+                                                version: ~
+                                                partitions: []
+                                            joins: []
+                                        lateral_views: []
+                                        selection:
+                                          Like:
+                                            negated: false
+                                            expr:
+                                              Identifier:
+                                                value: p_name
+                                                quote_style: ~
+                                            pattern:
+                                              Value:
+                                                SingleQuotedString: forest%
+                                            escape_char: ~
+                                        group_by:
+                                          Expressions: []
+                                        cluster_by: []
+                                        distribute_by: []
+                                        sort_by: []
+                                        having: ~
+                                        named_window: []
+                                        qualify: ~
+                                    order_by: []
+                                    limit: ~
+                                    limit_by: []
+                                    offset: ~
+                                    fetch: ~
+                                    locks: []
+                                  negated: false
+                              op: And
+                              right:
+                                BinaryOp:
+                                  left:
+                                    Identifier:
+                                      value: ps_availqty
+                                      quote_style: ~
+                                  op: Gt
+                                  right:
+                                    Subquery:
+                                      with: ~
+                                      body:
+                                        Select:
+                                          distinct: ~
+                                          top: ~
+                                          projection:
+                                            - UnnamedExpr:
+                                                BinaryOp:
+                                                  left:
+                                                    Value:
+                                                      Number:
+                                                        - "0.5"
+                                                        - false
+                                                  op: Multiply
+                                                  right:
+                                                    Function:
+                                                      name:
+                                                        - value: sum
+                                                          quote_style: ~
+                                                      args:
+                                                        - Unnamed:
+                                                            Expr:
+                                                              Identifier:
+                                                                value: l_quantity
+                                                                quote_style: ~
+                                                      filter: ~
+                                                      null_treatment: ~
+                                                      over: ~
+                                                      distinct: false
+                                                      special: false
+                                                      order_by: []
+                                          into: ~
+                                          from:
+                                            - relation:
+                                                Table:
+                                                  name:
+                                                    - value: lineitem
+                                                      quote_style: ~
+                                                  alias: ~
+                                                  args: ~
+                                                  with_hints: []
+                                                  version: ~
+                                                  partitions: []
+                                              joins: []
+                                          lateral_views: []
+                                          selection:
+                                            BinaryOp:
+                                              left:
+                                                BinaryOp:
+                                                  left:
+                                                    BinaryOp:
+                                                      left:
+                                                        BinaryOp:
+                                                          left:
+                                                            Identifier:
+                                                              value: l_partkey
+                                                              quote_style: ~
+                                                          op: Eq
+                                                          right:
+                                                            Identifier:
+                                                              value: ps_partkey
+                                                              quote_style: ~
+                                                      op: And
+                                                      right:
+                                                        BinaryOp:
+                                                          left:
+                                                            Identifier:
+                                                              value: l_suppkey
+                                                              quote_style: ~
+                                                          op: Eq
+                                                          right:
+                                                            Identifier:
+                                                              value: ps_suppkey
+                                                              quote_style: ~
+                                                  op: And
+                                                  right:
+                                                    BinaryOp:
+                                                      left:
+                                                        Identifier:
+                                                          value: l_shipdate
+                                                          quote_style: ~
+                                                      op: GtEq
+                                                      right:
+                                                        TypedString:
+                                                          data_type: Date
+                                                          value: 1994-01-01
+                                              op: And
+                                              right:
+                                                BinaryOp:
+                                                  left:
+                                                    Identifier:
+                                                      value: l_shipdate
+                                                      quote_style: ~
+                                                  op: Lt
+                                                  right:
+                                                    BinaryOp:
+                                                      left:
+                                                        TypedString:
+                                                          data_type: Date
+                                                          value: 1994-01-01
+                                                      op: Plus
+                                                      right:
+                                                        Interval:
+                                                          value:
+                                                            Value:
+                                                              SingleQuotedString: "1"
+                                                          leading_field: Year
+                                                          leading_precision: ~
+                                                          last_field: ~
+                                                          fractional_seconds_precision: ~
+                                          group_by:
+                                            Expressions: []
+                                          cluster_by: []
+                                          distribute_by: []
+                                          sort_by: []
+                                          having: ~
+                                          named_window: []
+                                          qualify: ~
+                                      order_by: []
+                                      limit: ~
+                                      limit_by: []
+                                      offset: ~
+                                      fetch: ~
+                                      locks: []
+                          group_by:
+                            Expressions: []
+                          cluster_by: []
+                          distribute_by: []
+                          sort_by: []
+                          having: ~
+                          named_window: []
+                          qualify: ~
+                      order_by: []
+                      limit: ~
+                      limit_by: []
+                      offset: ~
+                      fetch: ~
+                      locks: []
+                    negated: false
+                op: And
+                right:
+                  BinaryOp:
+                    left:
+                      Identifier:
+                        value: s_nationkey
+                        quote_style: ~
+                    op: Eq
+                    right:
+                      Identifier:
+                        value: n_nationkey
+                        quote_style: ~
+            op: And
+            right:
+              BinaryOp:
+                left:
+                  Identifier:
+                    value: n_name
+                    quote_style: ~
+                op: Eq
+                right:
+                  Value:
+                    SingleQuotedString: CANADA
+        group_by:
+          Expressions: []
+        cluster_by: []
+        distribute_by: []
+        sort_by: []
+        having: ~
+        named_window: []
+        qualify: ~
+    order_by:
+      - expr:
+          Identifier:
+            value: s_name
+            quote_style: ~
+        asc: ~
+        nulls_first: ~
+    limit: ~
+    limit_by: []
+    offset: ~
+    fetch: ~
+    locks: []
+

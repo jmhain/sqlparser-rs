@@ -1,0 +1,198 @@
+---
+source: tests/sqlparser_snapshot.rs
+expression: stmts
+---
+- Query:
+    with: ~
+    body:
+      Select:
+        distinct: ~
+        top: ~
+        projection:
+          - UnnamedExpr:
+              Identifier:
+                value: l_orderkey
+                quote_style: ~
+          - ExprWithAlias:
+              expr:
+                Function:
+                  name:
+                    - value: sum
+                      quote_style: ~
+                  args:
+                    - Unnamed:
+                        Expr:
+                          BinaryOp:
+                            left:
+                              Identifier:
+                                value: l_extendedprice
+                                quote_style: ~
+                            op: Multiply
+                            right:
+                              Nested:
+                                BinaryOp:
+                                  left:
+                                    Value:
+                                      Number:
+                                        - "1"
+                                        - false
+                                  op: Minus
+                                  right:
+                                    Identifier:
+                                      value: l_discount
+                                      quote_style: ~
+                  filter: ~
+                  null_treatment: ~
+                  over: ~
+                  distinct: false
+                  special: false
+                  order_by: []
+              alias:
+                value: revenue
+                quote_style: ~
+          - UnnamedExpr:
+              Identifier:
+                value: o_orderdate
+                quote_style: ~
+          - UnnamedExpr:
+              Identifier:
+                value: o_shippriority
+                quote_style: ~
+        into: ~
+        from:
+          - relation:
+              Table:
+                name:
+                  - value: customer
+                    quote_style: ~
+                alias: ~
+                args: ~
+                with_hints: []
+                version: ~
+                partitions: []
+            joins: []
+          - relation:
+              Table:
+                name:
+                  - value: orders
+                    quote_style: ~
+                alias: ~
+                args: ~
+                with_hints: []
+                version: ~
+                partitions: []
+            joins: []
+          - relation:
+              Table:
+                name:
+                  - value: lineitem
+                    quote_style: ~
+                alias: ~
+                args: ~
+                with_hints: []
+                version: ~
+                partitions: []
+            joins: []
+        lateral_views: []
+        selection:
+          BinaryOp:
+            left:
+              BinaryOp:
+                left:
+                  BinaryOp:
+                    left:
+                      BinaryOp:
+                        left:
+                          BinaryOp:
+                            left:
+                              Identifier:
+                                value: c_mktsegment
+                                quote_style: ~
+                            op: Eq
+                            right:
+                              Value:
+                                SingleQuotedString: BUILDING
+                        op: And
+                        right:
+                          BinaryOp:
+                            left:
+                              Identifier:
+                                value: c_custkey
+                                quote_style: ~
+                            op: Eq
+                            right:
+                              Identifier:
+                                value: o_custkey
+                                quote_style: ~
+                    op: And
+                    right:
+                      BinaryOp:
+                        left:
+                          Identifier:
+                            value: l_orderkey
+                            quote_style: ~
+                        op: Eq
+                        right:
+                          Identifier:
+                            value: o_orderkey
+                            quote_style: ~
+                op: And
+                right:
+                  BinaryOp:
+                    left:
+                      Identifier:
+                        value: o_orderdate
+                        quote_style: ~
+                    op: Lt
+                    right:
+                      TypedString:
+                        data_type: Date
+                        value: 1995-03-15
+            op: And
+            right:
+              BinaryOp:
+                left:
+                  Identifier:
+                    value: l_shipdate
+                    quote_style: ~
+                op: Gt
+                right:
+                  TypedString:
+                    data_type: Date
+                    value: 1995-03-15
+        group_by:
+          Expressions:
+            - Identifier:
+                value: l_orderkey
+                quote_style: ~
+            - Identifier:
+                value: o_orderdate
+                quote_style: ~
+            - Identifier:
+                value: o_shippriority
+                quote_style: ~
+        cluster_by: []
+        distribute_by: []
+        sort_by: []
+        having: ~
+        named_window: []
+        qualify: ~
+    order_by:
+      - expr:
+          Identifier:
+            value: revenue
+            quote_style: ~
+        asc: false
+        nulls_first: ~
+      - expr:
+          Identifier:
+            value: o_orderdate
+            quote_style: ~
+        asc: ~
+        nulls_first: ~
+    limit: ~
+    limit_by: []
+    offset: ~
+    fetch: ~
+    locks: []
+

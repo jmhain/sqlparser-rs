@@ -1,0 +1,257 @@
+---
+source: tests/sqlparser_snapshot.rs
+expression: stmts
+---
+- Query:
+    with: ~
+    body:
+      Select:
+        distinct: ~
+        top: ~
+        projection:
+          - UnnamedExpr:
+              Identifier:
+                value: c_custkey
+                quote_style: ~
+          - UnnamedExpr:
+              Identifier:
+                value: c_name
+                quote_style: ~
+          - ExprWithAlias:
+              expr:
+                Function:
+                  name:
+                    - value: sum
+                      quote_style: ~
+                  args:
+                    - Unnamed:
+                        Expr:
+                          BinaryOp:
+                            left:
+                              Identifier:
+                                value: l_extendedprice
+                                quote_style: ~
+                            op: Multiply
+                            right:
+                              Nested:
+                                BinaryOp:
+                                  left:
+                                    Value:
+                                      Number:
+                                        - "1"
+                                        - false
+                                  op: Minus
+                                  right:
+                                    Identifier:
+                                      value: l_discount
+                                      quote_style: ~
+                  filter: ~
+                  null_treatment: ~
+                  over: ~
+                  distinct: false
+                  special: false
+                  order_by: []
+              alias:
+                value: revenue
+                quote_style: ~
+          - UnnamedExpr:
+              Identifier:
+                value: c_acctbal
+                quote_style: ~
+          - UnnamedExpr:
+              Identifier:
+                value: n_name
+                quote_style: ~
+          - UnnamedExpr:
+              Identifier:
+                value: c_address
+                quote_style: ~
+          - UnnamedExpr:
+              Identifier:
+                value: c_phone
+                quote_style: ~
+          - UnnamedExpr:
+              Identifier:
+                value: c_comment
+                quote_style: ~
+        into: ~
+        from:
+          - relation:
+              Table:
+                name:
+                  - value: customer
+                    quote_style: ~
+                alias: ~
+                args: ~
+                with_hints: []
+                version: ~
+                partitions: []
+            joins: []
+          - relation:
+              Table:
+                name:
+                  - value: orders
+                    quote_style: ~
+                alias: ~
+                args: ~
+                with_hints: []
+                version: ~
+                partitions: []
+            joins: []
+          - relation:
+              Table:
+                name:
+                  - value: lineitem
+                    quote_style: ~
+                alias: ~
+                args: ~
+                with_hints: []
+                version: ~
+                partitions: []
+            joins: []
+          - relation:
+              Table:
+                name:
+                  - value: nation
+                    quote_style: ~
+                alias: ~
+                args: ~
+                with_hints: []
+                version: ~
+                partitions: []
+            joins: []
+        lateral_views: []
+        selection:
+          BinaryOp:
+            left:
+              BinaryOp:
+                left:
+                  BinaryOp:
+                    left:
+                      BinaryOp:
+                        left:
+                          BinaryOp:
+                            left:
+                              BinaryOp:
+                                left:
+                                  Identifier:
+                                    value: c_custkey
+                                    quote_style: ~
+                                op: Eq
+                                right:
+                                  Identifier:
+                                    value: o_custkey
+                                    quote_style: ~
+                            op: And
+                            right:
+                              BinaryOp:
+                                left:
+                                  Identifier:
+                                    value: l_orderkey
+                                    quote_style: ~
+                                op: Eq
+                                right:
+                                  Identifier:
+                                    value: o_orderkey
+                                    quote_style: ~
+                        op: And
+                        right:
+                          BinaryOp:
+                            left:
+                              Identifier:
+                                value: o_orderdate
+                                quote_style: ~
+                            op: GtEq
+                            right:
+                              TypedString:
+                                data_type: Date
+                                value: 1993-10-01
+                    op: And
+                    right:
+                      BinaryOp:
+                        left:
+                          Identifier:
+                            value: o_orderdate
+                            quote_style: ~
+                        op: Lt
+                        right:
+                          BinaryOp:
+                            left:
+                              TypedString:
+                                data_type: Date
+                                value: 1993-10-01
+                            op: Plus
+                            right:
+                              Interval:
+                                value:
+                                  Value:
+                                    SingleQuotedString: "3"
+                                leading_field: Month
+                                leading_precision: ~
+                                last_field: ~
+                                fractional_seconds_precision: ~
+                op: And
+                right:
+                  BinaryOp:
+                    left:
+                      Identifier:
+                        value: l_returnflag
+                        quote_style: ~
+                    op: Eq
+                    right:
+                      Value:
+                        SingleQuotedString: R
+            op: And
+            right:
+              BinaryOp:
+                left:
+                  Identifier:
+                    value: c_nationkey
+                    quote_style: ~
+                op: Eq
+                right:
+                  Identifier:
+                    value: n_nationkey
+                    quote_style: ~
+        group_by:
+          Expressions:
+            - Identifier:
+                value: c_custkey
+                quote_style: ~
+            - Identifier:
+                value: c_name
+                quote_style: ~
+            - Identifier:
+                value: c_acctbal
+                quote_style: ~
+            - Identifier:
+                value: c_phone
+                quote_style: ~
+            - Identifier:
+                value: n_name
+                quote_style: ~
+            - Identifier:
+                value: c_address
+                quote_style: ~
+            - Identifier:
+                value: c_comment
+                quote_style: ~
+        cluster_by: []
+        distribute_by: []
+        sort_by: []
+        having: ~
+        named_window: []
+        qualify: ~
+    order_by:
+      - expr:
+          Identifier:
+            value: revenue
+            quote_style: ~
+        asc: false
+        nulls_first: ~
+    limit: ~
+    limit_by: []
+    offset: ~
+    fetch: ~
+    locks: []
+
